@@ -2,12 +2,69 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='%23FF0000' d='M6 0v6H0v4h6v6h4v-6h6V6h-6V0H6z'/%3E%3C/svg%3E%0A"
+    />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Crosshair</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+      canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    </style>
   </head>
   <body>
     <canvas id="crosshairCanvas"></canvas>
-    <script type="module" src="/main.js"></script>
+    <script>
+      // Get the canvas element
+      const canvas = document.getElementById("crosshairCanvas");
+      const context = canvas.getContext("2d");
+
+      // Set the canvas size to match the viewport
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      // Draw the crosshair
+      function drawCrosshair() {
+        // Clear the canvas
+        context.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Draw vertical line
+        context.beginPath();
+        context.moveTo(canvas.width / 2, 0);
+        context.lineTo(canvas.width / 2, canvas.height);
+        context.strokeStyle = "red";
+        context.lineWidth = 1;
+        context.stroke();
+
+        // Draw horizontal line
+        context.beginPath();
+        context.moveTo(0, canvas.height / 2);
+        context.lineTo(canvas.width, canvas.height / 2);
+        context.strokeStyle = "red";
+        context.lineWidth = 1;
+        context.stroke();
+      }
+
+      // Redraw the crosshair on window resize
+      window.addEventListener("resize", function () {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        drawCrosshair();
+      });
+
+      // Initial drawing
+      drawCrosshair();
+    </script>
   </body>
 </html>
