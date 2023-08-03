@@ -10,6 +10,6 @@
     "surge": "vite build && surge dist crosshair.surge.sh"
   },
   "devDependencies": {
-    "vite": "^4.3.2"
+    "vite": "^4.3.9"
   }
 }
